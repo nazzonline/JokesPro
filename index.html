@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background-color: #2d3748;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <br>
+    <br> <br>
+    <br>
+    <br> <br>
+    <br>
+    <br>
+    <br>
+    <div class="container mx-auto p-4 ">
+        <div class="max-w-md w-full">
+            <div class="card p-6">
+                <h1 class="text-4xl mb-4 text-center">Jokes Generator</h1>
+                <div id="joke-container" class="mb-4"></div>
+                <button id="get-joke-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+                    Get Joke
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                const jokeContainer = document.getElementById('joke-container');
+                const getJokeBtn = document.getElementById('get-joke-btn');
+
+                getJokeBtn.addEventListener('click', function() {
+                    fetch('https://official-joke-api.appspot.com/random_joke')
+                        .then(response => response.json())
+                        .then(data => {
+                            jokeContainer.innerHTML = `
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <p class="text-xl">${data.setup}</p>
+                                    <p class="text-lg mt-2">${data.punchline}</p>
+                                </div>
+                            `;
+                        })
+                        .catch(error => console.error('Error fetching joke:', error));
+                });
+            });    </script>
+    
+    <br>
+    <br>
+    <footer>
+        <h1>Dev - CodeBeast</h1>
+    </footer>
+</center>
+</body>
+</html>
